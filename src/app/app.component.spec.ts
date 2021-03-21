@@ -1,5 +1,10 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterLink, RouterLinkWithHref, RouterOutlet } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -7,6 +12,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports:[RouterTestingModule.withRoutes([])]
     }).compileComponents();
   }));
 
@@ -16,16 +23,13 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'PruebasUnitarias'`, () => {
+  it('Debe de tener un router-outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('PruebasUnitarias');
+
+    const debugElement = fixture.debugElement.query(By.directive(RouterOutlet));
+
+    expect(debugElement).not.toBeNull();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('PruebasUnitarias app is running!');
-  });
+
 });
